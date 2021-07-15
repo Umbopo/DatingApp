@@ -11,9 +11,10 @@ namespace API.Services
     public class PhotoService : IPhotoService
     {
         private readonly Cloudinary _cloudinary;
-        public PhotoService(IOptions<CloudinarySettings>  config)
+        public PhotoService(IOptions<CloudinarySettings> config)
         {
-            var acc = new Account (
+            var acc = new Account
+            (
                 config.Value.CloudName,
                 config.Value.ApiKey,
                 config.Value.ApiSecret
@@ -36,6 +37,7 @@ namespace API.Services
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
+
             return uploadResult;
         }
 
@@ -44,6 +46,7 @@ namespace API.Services
             var deleteParams = new DeletionParams(publicId);
 
             var result = await _cloudinary.DestroyAsync(deleteParams);
+
             return result;
         }
     }
